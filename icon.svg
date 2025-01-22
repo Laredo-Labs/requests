@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="512" cy="512" r="480" fill="#0084FF"/>
+    
+    <!-- Chat bubble outline -->
+    <path d="M512 220C321.6 220 168 349.6 168 508C168 580.8 196.8 646.4 246.4 696C236.8 742.4 214.4 785.6 212.8 787.2C208 795.2 209.6 804.8 216 811.2C220.8 816 227.2 818.4 233.6 818.4C235.2 818.4 236.8 818.4 238.4 817.6C240 817.6 299.2 795.2 352 764.8C401.6 785.6 456 796.8 512 796.8C702.4 796.8 856 667.2 856 508C856 349.6 702.4 220 512 220Z" fill="white"/>
+    
+    <!-- Inner dots -->
+    <circle cx="384" cy="508" r="48" fill="#0084FF"/>
+    <circle cx="512" cy="508" r="48" fill="#0084FF"/>
+    <circle cx="640" cy="508" r="48" fill="#0084FF"/>
+</svg>

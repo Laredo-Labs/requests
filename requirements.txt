@@ -1,0 +1,26 @@
+# Core dependencies
+openai>=1.0.0
+PyQt6>=6.4.0
+PyQt6-Qt6>=6.4.0
+keyring>=24.2.0
+python-dotenv>=1.0.0
+
+# Security and encryption
+cryptography>=44.0.0
+certifi>=2024.2.0
+
+# Application building and packaging
+PyInstaller>=6.3.0
+packaging>=24.0
+
+# Development and testing
+pytest>=7.4.0
+typing-extensions>=4.12.0
+
+# Network and API handling
+requests>=2.31.0
+urllib3>=2.1.0
+
+# System integration
+keyring>=24.2.0
+appdirs>=1.4.4
