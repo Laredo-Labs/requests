@@ -5,49 +5,28 @@
 2. Type "Terminal"
 3. Press Enter
 
-## 2️⃣ Go to Your Files
-Copy and paste this exactly:
+## 2️⃣ Run These Commands
+Copy and paste these commands one at a time:
 ```bash
 cd ~/Downloads/ETMAssistant
+chmod +x setup_and_build.sh
+./setup_and_build.sh
 ```
 
-## 3️⃣ Make Build Script Executable
-Copy and paste this exactly:
-```bash
-chmod +x simple_build.command
-```
+## 3️⃣ Wait for Success
+1. Watch the progress in Terminal
+2. You'll see checkmarks (✓) as each step completes
+3. Wait for "Setup and build complete!"
+4. Press Enter when done
 
-## 4️⃣ Run the Build
-1. In Finder:
-   - Go to Downloads
-   - Open ETMAssistant folder
-   - Double-click `simple_build.command`
-2. If you see "cannot be opened":
-   - Right-click `simple_build.command`
-   - Choose "Open"
-   - Click "Open" again
-3. Wait for "Build complete!"
-
-## 5️⃣ Find Your Files
+## 4️⃣ Find Your Files
 1. In your ETMAssistant folder:
    - Open the `dist` folder
    - You'll see:
      - `ChatGPT Assistant.app`
      - `ChatGPT Assistant.dmg`
 
-## 6️⃣ Test Everything
-1. Make test script executable:
-```bash
-chmod +x test_app.command
-```
-
-2. Run the test:
-   - Double-click `test_app.command`
-   - If you see "cannot be opened":
-     - Right-click → Open → Open
-   - Wait for "All tests passed!"
-
-3. Try the app:
+## 5️⃣ Try the App
    - Double-click `ChatGPT Assistant.dmg`
    - Drag the app icon to Applications
    - Go to Applications folder
@@ -66,9 +45,9 @@ chmod +x test_app.command
 2. Copy and paste these commands:
 ```bash
 cd ~/Downloads/ETMAssistant
-rm -rf dist build venv
+./setup_and_build.sh
 ```
-3. Try steps 3-6 again
+3. When complete, try installing the app again
 
 ## ✅ Success Checklist
 - [ ] Build script ran without errors
