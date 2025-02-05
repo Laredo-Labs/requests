@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>Inspection Details</h1>
+        
+        <!-- Inspection Information -->
+        <div class="inspection-header">
+            <h4>{{ inspection.client_name }}</h4>
+            <h6 class="text-muted">{{ inspection.address }}</h6>
+            <p><strong>Date:</strong> {{ inspection.inspection_date.strftime('%Y-%m-%d %H:%M') }}</p>
+            {% if inspection.notes %}
+                <p><strong>Notes:</strong><br>{{ inspection.notes }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Add Finding Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Add New Finding</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_finding', inspection_id=inspection.id) }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="Structural">Structural</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="HVAC">HVAC</option>
+                            <option value="Interior">Interior</option>
+                            <option value="Exterior">Exterior</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Add Finding</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Findings List -->
+        <h3>Findings</h3>
+        {% if inspection.findings %}
+            <div class="row">
+                {% for finding in inspection.findings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="category-badge category-{{ finding.category }}">{{ finding.category }}</span>
+                            <p class="card-text">{{ finding.description }}</p>
+                            {% if finding.image_path %}
+                                <img src="{{ url_for('static', filename=finding.image_path) }}" 
+                                     class="finding-image img-fluid mb-2" alt="Finding image">
+                            {% endif %}
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Added: {{ finding.created_at.strftime('%Y-%m-%d %H:%M') }}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No findings recorded yet. Add your first finding using the form above.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

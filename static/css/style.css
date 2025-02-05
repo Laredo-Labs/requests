@@ -1,0 +1,54 @@
+/* Custom styles for Home Inspector Pro */
+
+/* Card hover effect */
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Finding images */
+.finding-image {
+    max-height: 300px;
+    object-fit: contain;
+    width: 100%;
+}
+
+/* Category badges */
+.category-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    margin-bottom: 10px;
+}
+
+/* Category colors */
+.category-Structural { background-color: #dc3545; color: white; }
+.category-Electrical { background-color: #ffc107; color: black; }
+.category-Plumbing { background-color: #0dcaf0; color: black; }
+.category-HVAC { background-color: #198754; color: white; }
+.category-Interior { background-color: #6c757d; color: white; }
+.category-Exterior { background-color: #0d6efd; color: white; }
+.category-Other { background-color: #6610f2; color: white; }
+
+/* Inspection details section */
+.inspection-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

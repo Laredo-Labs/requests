@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>Inspections</h1>
+        <a href="{{ url_for('new_inspection') }}" class="btn btn-primary mb-3">New Inspection</a>
+        
+        {% if inspections %}
+            <div class="row">
+                {% for inspection in inspections %}
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ inspection.client_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ inspection.address }}</h6>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Date: {{ inspection.inspection_date.strftime('%Y-%m-%d %H:%M') }}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                Findings: {{ inspection.findings|length }}
+                            </p>
+                            <a href="{{ url_for('view_inspection', id=inspection.id) }}" 
+                               class="btn btn-info">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No inspections found. Create your first inspection using the button above.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
