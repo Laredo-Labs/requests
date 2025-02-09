@@ -34,10 +34,10 @@ if sys.argv[-1] == "publish":
     sys.exit()
 
 requires = [
-    "charset_normalizer>=2,<4",
-    "idna>=2.5,<4",
-    "urllib3>=1.21.1,<3",
-    "certifi>=2017.4.17",
+    "librosa>=0.10.0",
+    "numpy>=1.20.0",
+    "sounddevice>=0.4.5",
+    "soundfile>=0.12.0",
 ]
 test_requirements = [
     "pytest-httpbin==2.1.0",

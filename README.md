@@ -1,78 +1,98 @@
-# Requests
+# KeyDetector
 
-**Requests** is a simple, yet elegant, HTTP library.
+KeyDetector is a Python application that detects the musical key of audio files or real-time audio streams. It uses advanced audio processing techniques to analyze the harmonic content and determine the most likely musical key.
+
+## Features
+
+- Detect musical key from WAV, MP3, and other audio file formats
+- Real-time key detection from audio input (microphone)
+- Support for both major and minor keys
+- Configurable analysis window size
+- Command-line interface for easy use
+
+## Installation
+
+1. Install system dependencies (Linux/Debian):
+```bash
+sudo apt-get install portaudio19-dev
+```
+
+2. Install the package:
+```bash
+pip install .
+```
+
+Requests Usage
+
+### Command Line Interface
+
+1. Analyze an audio file:
+```bash
+python src/keydetector_cli.py --file path/to/audio.wav --duration 30
+```
+
+2. Real-time analysis from microphone:
+```bash
+python src/keydetector_cli.py --duration 30 --analysis-window 3
+```
+
+Options:
+- `--file`, `-f`: Input audio file path
+- `--duration`, `-d`: Duration to analyze in seconds (default: 30.0)
+- `--analysis-window`, `-w`: Analysis window size for streaming mode in seconds (default: 3.0)
+
+### Python API
 
 ```python
->>> import requests
->>> r = requests.get('https://httpbin.org/basic-auth/user/pass', auth=('user', 'pass'))
->>> r.status_code
-200
->>> r.headers['content-type']
-'application/json; charset=utf8'
->>> r.encoding
-'utf-8'
->>> r.text
-'{"authenticated": true, ...'
->>> r.json()
-{'authenticated': True, ...}
+from keydetector import KeyDetector
+
+# Analyze a file
+detector = KeyDetector(analysis_duration=30.0)
+key = detector.detect_from_file("path/to/audio.wav")
+print(f"The song is in {key}")
+
+# Real-time analysis
+detector = KeyDetector(analysis_duration=3.0)
+detector.start_stream()
+try:
+    while True:
+        current_key = detector.current_key
+        print(f"Current key: {current_key}")
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    detector.stop_stream()
 ```
 
-Requests allows you to send HTTP/1.1 requests extremely easily. There’s no need to manually add query strings to your URLs, or to form-encode your `PUT` & `POST` data — but nowadays, just use the `json` method!
+## How It Works
 
-Requests is one of the most downloaded Python packages today, pulling in around `30M downloads / week`— according to GitHub, Requests is currently [depended upon](https://github.com/psf/requests/network/dependents?package_id=UGFja2FnZS01NzA4OTExNg%3D%3D) by `1,000,000+` repositories. You may certainly put your trust in this code.
+KeyDetector uses the Krumhansl-Schmuckler key-finding algorithm, which:
 
-[![Downloads](https://static.pepy.tech/badge/requests/month)](https://pepy.tech/project/requests)
-[![Supported Versions](https://img.shields.io/pypi/pyversions/requests.svg)](https://pypi.org/project/requests)
-[![Contributors](https://img.shields.io/github/contributors/psf/requests.svg)](https://github.com/psf/requests/graphs/contributors)
+1. Analyzes the audio using chromagrams (pitch class profiles)
+2. Compares the pitch class distribution to known major and minor key profiles
+3. Determines the best matching key and mode (major/minor)
 
-## Installing Requests and Supported Versions
+The analysis focuses on the first portion of the song (configurable duration) since the key is typically most clearly established in the beginning.
 
-Requests is available on PyPI:
+## Requirements
 
-```console
-$ python -m pip install requests
+- Python 3.8 or higher
+- PortAudio (for real-time audio processing)
+- librosa (audio processing)
+- numpy (numerical computations)
+- sounddevice (audio streaming)
+
+## Development
+
+1. Install development dependencies:
+```bash
+pip install -e ".[dev]"
 ```
 
-Requests officially supports Python 3.8+.
-
-## Supported Features & Best–Practices
-
-Requests is ready for the demands of building robust and reliable HTTP–speaking applications, for the needs of today.
-
-- Keep-Alive & Connection Pooling
-- International Domains and URLs
-- Sessions with Cookie Persistence
-- Browser-style TLS/SSL Verification
-- Basic & Digest Authentication
-- Familiar `dict`–like Cookies
-- Automatic Content Decompression and Decoding
-- Multi-part File Uploads
-- SOCKS Proxy Support
-- Connection Timeouts
-- Streaming Downloads
-- Automatic honoring of `.netrc`
-- Chunked HTTP Requests
-
-## API Reference and User Guide available on [Read the Docs](https://requests.readthedocs.io)
-
-[![Read the Docs](https://raw.githubusercontent.com/psf/requests/main/ext/ss.png)](https://requests.readthedocs.io)
-
-## Cloning the repository
-
-When cloning the Requests repository, you may need to add the `-c
-fetch.fsck.badTimezone=ignore` flag to avoid an error about a bad commit (see
-[this issue](https://github.com/psf/requests/issues/2690) for more background):
-
-```shell
-git clone -c fetch.fsck.badTimezone=ignore https://github.com/psf/requests.git
+2. Run tests:
+```bash
+pytest tests/
 ```
 
-You can also apply this setting to your global Git config:
+## License
 
-```shell
-git config --global fetch.fsck.badTimezone ignore
-```
-
----
-
-[![Kenneth Reitz](https://raw.githubusercontent.com/psf/requests/main/ext/kr.png)](https://kennethreitz.org) [![Python Software Foundation](https://raw.githubusercontent.com/psf/requests/main/ext/psf.png)](https://www.python.org/psf)
+MIT License
